@@ -8,7 +8,6 @@ const server = new ws.Server({ server: app });
 const MAX_PLAYER = 2;
 
 
-
 /**
  * NOTA SULLA FUNZIONE on(string, callback)
  * 
@@ -31,14 +30,13 @@ server.on('connection', socket => {
     */
     socket.on('message', message => {
         let data = JSON.parse(message);
-        
         console.log(data);
-        // console.log(server.clients.size);
 
+        // Invio dati all'avversario
         server.clients.forEach(client => {
             if (client != socket && client.readyState === ws.OPEN)
             {
-                client.send(JSON.stringify({"messaggio": data}));
+                client.send(JSON.stringify({"enemyInfo": data}));
             }
         });
     });
@@ -66,7 +64,6 @@ server.on('connection', socket => {
     {   
         socket.send(JSON.stringify({"numPlayers": server.clients.size}));
     }
-
 });
 
 
@@ -77,7 +74,6 @@ server.on('connection', socket => {
  * 
  * I termini per definire chi possiede uno sprite, è quello di chi si collega prima alla sessione
  * di gioco.
- * 
  * 
  * @param {Array.<WebSocket>} clients - Lista di client WebSocket connessi.
  */
