@@ -1,6 +1,8 @@
 const ws = require('ws');
 const express = require('express');
 
+const serverBoard = require('../js/board');
+
 const port = process.env.PORT || 3000;
 const app = express().listen(port, () => { console.log("Server in ascolto su " + port); });
 
@@ -19,18 +21,25 @@ const MAX_PLAYER = 2;
 
 
 /** 
- * Gestione evento 'connection'. Viene attivato quando si connette un utente al server socket.
+ * Gestione evento 'connection'. 
+ * 
+ * Viene attivato quando si connette un utente al server socket.
  * Il parametro che contiene la callback è di tipo WebSocket e rappresenta l'utente connesso.
  */
 server.on('connection', socket => {
 
     /** 
-    * Gestione evento 'message'. Viene attivato quando un untente manda un messaggio al server.
+    * Gestione evento 'message'. 
+    * 
+    * Viene attivato quando un untente manda un messaggio al server.
     * Il parametro che contiene la callback è di tipo string e rappresenta il messaggio inviato da un utente.
     */
     socket.on('message', message => {
         let data = JSON.parse(message);
         console.log(data);
+
+        serverBoard.updateServeBoard(data);
+        let spriteWinner = serverBoard.checkWinner();
 
         // Invio dati all'avversario
         server.clients.forEach(client => {
@@ -39,14 +48,21 @@ server.on('connection', socket => {
                 client.send(JSON.stringify({"enemyInfo": data}));
             }
         });
+
+        if (!!spriteWinner) // Abbiamo un vincitore
+        {
+            gameOver(server.clients, spriteWinner);
+        }
     });
 
     
     /** 
-    * Gestione evento 'close'. Viene attivato quando si disconnette un utente dal server socket.
-    * I parametri due parametri contenuti della callback sono uno di tipo number e il secondo di tipo string. 
+    * Gestione evento 'close'. 
+    * 
+    * Viene attivato quando si disconnette un utente dal server socket.
+    * I due parametri contenuti della callback sono uno di tipo number e il secondo di tipo string. 
     * Il primo è un codice numerico usato per spiegare il motivo della disconnessione, il secondo è una stringa
-    * leggibile dall'uomo che spiega il perchè si è disconnesso.
+    * leggibile dall'uomo che spiega il motivo della disconnessione.
     * */
     socket.on('close', (code, reason) => {
         console.log("Code: " + code, " Reason: " + reason);
@@ -56,7 +72,7 @@ server.on('connection', socket => {
     {
         socket.send(JSON.stringify({"numPlayers": server.clients.size}));
         
-        // Funzione chiamata per far partire la partita
+        // La partita inizia
         startGame(server.clients);
     }
 
@@ -88,4 +104,28 @@ function startGame(clients)
     // Inzio dei dati ai giocatori
     players[0].send(JSON.stringify({"spriteType": players[0].clientName}));
     players[1].send(JSON.stringify({"spriteType": players[1].clientName}));
+}
+
+
+/**
+ * Funzione usata per inviare ai giocatori chi ha vinto e chi ha perso.
+ * 
+ * @param {Array.<WebSocket>} clients - Lista di client WebSocket connessi.
+ * @param {String} spriteWinner - Sprite vincitore.
+ */
+function gameOver(clients, spriteWinner) 
+{
+    var players = [...clients];
+
+    if (spriteWinner === serverBoard.OBJ_SPRITE.O_S) // Vince il giocatore 1
+    {
+        players[0].send(JSON.stringify({"gameover": "win"}));
+        players[1].send(JSON.stringify({"gameover": "lose"}));
+    }
+
+    else if (spriteWinner === serverBoard.OBJ_SPRITE.X_S) // Vince il giocatore 2
+    {
+        players[0].send(JSON.stringify({"gameover": "lose"}));
+        players[1].send(JSON.stringify({"gameover": "win"}));
+    }    
 }
