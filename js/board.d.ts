@@ -20,3 +20,7 @@ export declare function updateServeBoard(playerInfo: {
  * @returns Stringa che identifica il vincitore.
  */
 export declare function checkWinner(): string;
+/**
+ * Fa ripartire la partita di gioco.
+*/
+export declare function restart(): void;

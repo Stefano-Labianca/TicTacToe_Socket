@@ -66,6 +66,15 @@ export function checkWinner(): string
 
 
 /**
+ * Fa ripartire la partita di gioco.
+*/
+export function restart(): void 
+{
+    gameBoard = [[-1, -1, -1], [-1, -1, -1], [-1, -1, -1]];
+}
+
+
+/**
  * Convertire una stringa, del tipo '(1, 1)', in  un'istanza della classe Vector2D.
  * 
  * @param strV Stringa da convertire.

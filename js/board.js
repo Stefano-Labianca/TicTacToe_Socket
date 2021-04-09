@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.checkWinner = exports.updateServeBoard = exports.OBJ_SPRITE = void 0;
+exports.restart = exports.checkWinner = exports.updateServeBoard = exports.OBJ_SPRITE = void 0;
 const Vector2D_1 = require("./utility/Vector2D");
 /** Contiene le informazioni sul tipo di sprite usato.  */
 exports.OBJ_SPRITE = { "O_S": "o_player", "X_S": "x_player" };
@@ -47,6 +47,13 @@ function checkWinner() {
     return winnerSprite;
 }
 exports.checkWinner = checkWinner;
+/**
+ * Fa ripartire la partita di gioco.
+*/
+function restart() {
+    gameBoard = [[-1, -1, -1], [-1, -1, -1], [-1, -1, -1]];
+}
+exports.restart = restart;
 /**
  * Convertire una stringa, del tipo '(1, 1)', in  un'istanza della classe Vector2D.
  *
