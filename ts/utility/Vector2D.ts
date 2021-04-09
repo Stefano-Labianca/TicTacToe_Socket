@@ -1,7 +1,8 @@
 /**
- * ## Vector2D
+ * ## Classe Vector2D
  * 
  * La classe Vector2D viene utilizzata per racchiudere in un'unica variabile delle coordinate.
+ *
  */
 export class Vector2D 
 {   
@@ -13,15 +14,14 @@ export class Vector2D
 
 
     /**
-     * @constructor
-     * @param x ascissa 
-     * @param y ordinata
+     * @constructor Costruttore classe Vector2D.
+     * @param x ascissa.
+     * @param y ordinata.
      */
     constructor(x: number, y: number) 
     {
         this.x = x;
         this.y = y;
     }
-
 }
 

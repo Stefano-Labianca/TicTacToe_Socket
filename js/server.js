@@ -1,12 +1,14 @@
 const ws = require('ws');
 const express = require('express');
 
-const serverBoard = require('../js/board');
+const gameBoard = require('../js/board');
 
 const port = process.env.PORT || 3000;
 const app = express().listen(port, () => { console.log("Server in ascolto su " + port); });
 
 const server = new ws.Server({ server: app });
+const serverBoard = new gameBoard.Board();
+
 const MAX_PLAYER = 2;
 
 
@@ -89,11 +91,11 @@ server.on('connection', socket => {
 
 
 /**
- * Funzione usata per determinare quali, dei due giocatori, inizierà per primo o per secondo il gioco.
- * Un giocatore inizierà per primo se possiede lo sprite 'cerchio', il secondo invece avrà lo sprite
- * 'croce'. 
+ * Funzione usata per **determinare** quali, dei due giocatori, inizierà per **primo** o per **secondo** il gioco.
+ * Un giocatore inizierà per primo se possiede lo sprite **cerchio**, il secondo invece avrà lo sprite
+ * **croce**. 
  * 
- * I termini per definire chi possiede uno sprite, è quello di chi si collega prima alla sessione
+ * I termini per definire chi possiede uno sprite, è quello di **chi si collega prima** alla sessione
  * di gioco.
  * 
  * @param {Array.<WebSocket>} clients - Lista di client WebSocket connessi.
@@ -113,11 +115,11 @@ function startGame(clients)
 
 
 /**
- * Funzione usata per inviare ai giocatori delle informazioni su chi ha vinto e su chi ha perso.
+ * Funzione usata per **inviare** ai giocatori delle informazioni su **chi ha vinto e su chi ha perso**.
  * 
- * Il terzo parametro della funzione, chiamato 'draw', viene usato per capire se i giocatori
- * si trovano in una condizione di pareggio. Di default il suo valore è settato a 'false', ma nel caso 
- * venisse passato il valore 'true', allora si è verificato un pareggio.
+ * Il terzo parametro della funzione, chiamato ***draw***, viene usato per capire se i giocatori
+ * si trovano in una **condizione di pareggio**. Di default il suo valore è settato a **false**, ma nel caso 
+ * venisse passato il valore **true**, allora si è verificato un pareggio.
  * 
  * @param {Array.<WebSocket>} clients - Array di client WebSocket connessi.
  * @param {String} spriteWinner - Sprite vincitore.
