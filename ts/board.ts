@@ -4,6 +4,7 @@ import { Vector2D } from './utility/Vector2D';
 export const OBJ_SPRITE: {"O_S": string, "X_S": string} = {"O_S": "o_player", "X_S": "x_player"};
 
 const PLAYERS_VALUE: {"FIRST": number, "SECOND": number} = {"FIRST": 0, "SECOND": 1};
+const EMPTY_CELL: number = -1;
 
 var gameBoard: Array<Array<number>> = [[-1, -1, -1], [-1, -1, -1], [-1, -1, -1]];
 var round: number = 0
@@ -71,6 +72,32 @@ export function checkWinner(): string
 export function restart(): void 
 {
     gameBoard = [[-1, -1, -1], [-1, -1, -1], [-1, -1, -1]];
+}
+
+
+/**
+ * Controlla se avviene un caso di pareggio, che si verificherà in caso
+ * all'interno della griglia di gioco, nessuno dei due gocatori a dato vita 
+ * a pattern che permettessero la sua vincita e, sopratutto, non ci sono più 
+ * celle libere.
+ * 
+ * In caso ci fossero delle celle libere, restituirà false, altrimenti true.
+ * 
+ * @returns Esito ricerca. 
+ */
+export function isDraw(): boolean 
+{
+    for (let i = 0; i < gameBoard.length; i++) 
+    {
+        let result = gameBoard[i].find((element: number) => element === EMPTY_CELL);
+        
+        if (result !== undefined)
+        {
+            return false;
+        }
+    }
+
+    return true;
 }
 
 

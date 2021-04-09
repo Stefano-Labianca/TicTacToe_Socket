@@ -36,9 +36,8 @@ server.on('connection', socket => {
     */
     socket.on('message', message => {
         let data = JSON.parse(message);
-        console.log(data);
-
         serverBoard.updateServeBoard(data);
+
         let spriteWinner = serverBoard.checkWinner();
 
         // Invio dati all'avversario
@@ -52,6 +51,12 @@ server.on('connection', socket => {
         if (!!spriteWinner) // Abbiamo un vincitore
         {
             gameOver(server.clients, spriteWinner);
+        }
+
+        // Verifico se non ci sono pattern vincenti e ci si trova in una situazione di pareggio. 
+        if (!spriteWinner && serverBoard.isDraw()) 
+        {
+            gameOver(server.clients, spriteWinner, true);
         }
     });
 
@@ -108,24 +113,38 @@ function startGame(clients)
 
 
 /**
- * Funzione usata per inviare ai giocatori chi ha vinto e chi ha perso.
+ * Funzione usata per inviare ai giocatori delle informazioni su chi ha vinto e su chi ha perso.
  * 
- * @param {Array.<WebSocket>} clients - Lista di client WebSocket connessi.
+ * Il terzo parametro della funzione, chiamato 'draw', viene usato per capire se i giocatori
+ * si trovano in una condizione di pareggio. Di default il suo valore è settato a 'false', ma nel caso 
+ * venisse passato il valore 'true', allora si è verificato un pareggio.
+ * 
+ * @param {Array.<WebSocket>} clients - Array di client WebSocket connessi.
  * @param {String} spriteWinner - Sprite vincitore.
+ * @param {Boolean} draw - Determina se avviene un pareggio.
  */
-function gameOver(clients, spriteWinner) 
+function gameOver(clients, spriteWinner, draw = false) 
 {
     var players = [...clients];
 
-    if (spriteWinner === serverBoard.OBJ_SPRITE.O_S) // Vince il giocatore 1
+    if (!draw) // Non si è verificato il pareggio
     {
-        players[0].send(JSON.stringify({"gameover": "win"}));
-        players[1].send(JSON.stringify({"gameover": "lose"}));
+        if (spriteWinner === serverBoard.OBJ_SPRITE.O_S) // Vince il giocatore 1
+        {
+            players[0].send(JSON.stringify({"gameover": "win"}));
+            players[1].send(JSON.stringify({"gameover": "lose"}));
+        }
+    
+        else if (spriteWinner === serverBoard.OBJ_SPRITE.X_S) // Vince il giocatore 2
+        {
+            players[0].send(JSON.stringify({"gameover": "lose"}));
+            players[1].send(JSON.stringify({"gameover": "win"}));
+        }    
     }
 
-    else if (spriteWinner === serverBoard.OBJ_SPRITE.X_S) // Vince il giocatore 2
+    else if (draw) // Si è verificato il pareggio
     {
-        players[0].send(JSON.stringify({"gameover": "lose"}));
-        players[1].send(JSON.stringify({"gameover": "win"}));
-    }    
+        players[0].send(JSON.stringify({"gameover": "draw"}));
+        players[1].send(JSON.stringify({"gameover": "draw"}));
+    }
 }

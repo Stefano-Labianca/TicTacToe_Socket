@@ -24,3 +24,14 @@ export declare function checkWinner(): string;
  * Fa ripartire la partita di gioco.
 */
 export declare function restart(): void;
+/**
+ * Controlla se avviene un caso di pareggio, che si verificherà in caso
+ * all'interno della griglia di gioco, nessuno dei due gocatori a dato vita
+ * a pattern che permettessero la sua vincita e, sopratutto, non ci sono più
+ * celle libere.
+ *
+ * In caso ci fossero delle celle libere, restituirà false, altrimenti true.
+ *
+ * @returns Esito ricerca.
+ */
+export declare function isDraw(): boolean;

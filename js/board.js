@@ -1,10 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.restart = exports.checkWinner = exports.updateServeBoard = exports.OBJ_SPRITE = void 0;
+exports.isDraw = exports.restart = exports.checkWinner = exports.updateServeBoard = exports.OBJ_SPRITE = void 0;
 const Vector2D_1 = require("./utility/Vector2D");
 /** Contiene le informazioni sul tipo di sprite usato.  */
 exports.OBJ_SPRITE = { "O_S": "o_player", "X_S": "x_player" };
 const PLAYERS_VALUE = { "FIRST": 0, "SECOND": 1 };
+const EMPTY_CELL = -1;
 var gameBoard = [[-1, -1, -1], [-1, -1, -1], [-1, -1, -1]];
 var round = 0;
 /**
@@ -54,6 +55,26 @@ function restart() {
     gameBoard = [[-1, -1, -1], [-1, -1, -1], [-1, -1, -1]];
 }
 exports.restart = restart;
+/**
+ * Controlla se avviene un caso di pareggio, che si verificherà in caso
+ * all'interno della griglia di gioco, nessuno dei due gocatori a dato vita
+ * a pattern che permettessero la sua vincita e, sopratutto, non ci sono più
+ * celle libere.
+ *
+ * In caso ci fossero delle celle libere, restituirà false, altrimenti true.
+ *
+ * @returns Esito ricerca.
+ */
+function isDraw() {
+    for (let i = 0; i < gameBoard.length; i++) {
+        let result = gameBoard[i].find((element) => element === EMPTY_CELL);
+        if (result !== undefined) {
+            return false;
+        }
+    }
+    return true;
+}
+exports.isDraw = isDraw;
 /**
  * Convertire una stringa, del tipo '(1, 1)', in  un'istanza della classe Vector2D.
  *
