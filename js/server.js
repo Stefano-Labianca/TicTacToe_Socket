@@ -10,7 +10,7 @@ const server = new ws.Server({ server: app });
 const serverBoard = new gameBoard.Board();
 
 const MAX_PLAYER = 2;
-
+var rematchArray = [false, false];
 
 /**
  * NOTA SULLA FUNZIONE on(string, callback)
@@ -19,7 +19,7 @@ const MAX_PLAYER = 2;
  * Possiede due parametri, il primo è di tipo string e ci definisce il tipo di
  * evento da gestire. Il secondo parametro è una callback che, a seconda del tipo di
  * evento da gestire, avrà diversi parametri.
- */
+*/
 
 
 /** 
@@ -38,27 +38,50 @@ server.on('connection', socket => {
     */
     socket.on('message', message => {
         let data = JSON.parse(message);
-        serverBoard.updateServeBoard(data);
 
-        let spriteWinner = serverBoard.checkWinner();
-
-        // Invio dati all'avversario
-        server.clients.forEach(client => {
-            if (client != socket && client.readyState === ws.OPEN)
-            {
-                client.send(JSON.stringify({"enemyInfo": data}));
-            }
-        });
-
-        if (!!spriteWinner) // Abbiamo un vincitore
+        if (data.hasOwnProperty.call(data, "rematch"))
         {
-            gameOver(server.clients, spriteWinner);
+            rematch(data, server.clients);
         }
 
-        // Verifico se non ci sono pattern vincenti e ci si trova in una situazione di pareggio. 
-        if (!spriteWinner && serverBoard.isDraw()) 
+        if (data.hasOwnProperty.call(data, "chat"))
         {
-            gameOver(server.clients, spriteWinner, true);
+            console.log(data);
+
+            // Invio messaggio della chat
+            server.clients.forEach(client => {
+                if (client != socket && client.readyState === ws.OPEN)
+                {
+                    client.send(JSON.stringify(data));
+                }
+            });
+        }
+
+        else
+        {
+            serverBoard.updateServeBoard(data);
+            console.log(data);
+            
+            let spriteWinner = serverBoard.checkWinner();
+    
+            // Invio dati all'avversario
+            server.clients.forEach(client => {
+                if (client != socket && client.readyState === ws.OPEN)
+                {
+                    client.send(JSON.stringify({"enemyInfo": data}));
+                }
+            });
+    
+            if (!!spriteWinner) // Abbiamo un vincitore
+            {
+                gameOver(server.clients, spriteWinner);
+            }
+    
+            // Verifico se non ci sono pattern vincenti e ci si trova in una situazione di pareggio. 
+            if (!spriteWinner && serverBoard.isDraw()) 
+            {
+                gameOver(server.clients, spriteWinner, true);
+            }
         }
     });
 
@@ -72,7 +95,28 @@ server.on('connection', socket => {
     * leggibile dall'uomo che spiega il motivo della disconnessione.
     * */
     socket.on('close', (code, reason) => {
-        console.log("Code: " + code, " Reason: " + reason);
+        if (server.clients.size > 0) // Controllo se ci sono ancora dei giocatori
+        {
+            if (code != 1006)
+            {
+                if (reason.substring(0, reason.length - 1) === "giveup")
+                {
+                    let lastOne = [...server.clients];
+                    lastOne[0].send(JSON.stringify({"gameover": "enemy_quit"}));
+                }
+            }
+
+            else
+            {
+                let lastOne = [...server.clients];
+                lastOne[0].send(JSON.stringify({"gameover": "enemy_quit"}));
+            }
+        }
+        
+        else
+        {
+            console.log("Partita senza giocatori :(");
+        }
     });
 
     if (server.clients.size === MAX_PLAYER)
@@ -109,8 +153,8 @@ function startGame(clients)
     players[1].clientName = "x_player";
 
     // Inzio dei dati ai giocatori
-    players[0].send(JSON.stringify({"spriteType": players[0].clientName}));
-    players[1].send(JSON.stringify({"spriteType": players[1].clientName}));
+    players[0].send(JSON.stringify({"spriteType": players[0].clientName, "round": "first"}));
+    players[1].send(JSON.stringify({"spriteType": players[1].clientName, "round": "second"}));
 }
 
 
@@ -122,8 +166,8 @@ function startGame(clients)
  * venisse passato il valore **true**, allora si è verificato un pareggio.
  * 
  * @param {Array.<WebSocket>} clients - Array di client WebSocket connessi.
- * @param {String} spriteWinner - Sprite vincitore.
- * @param {Boolean} draw - Determina se avviene un pareggio.
+ * @param {string} spriteWinner - Sprite vincitore.
+ * @param {boolean} [draw=false] - Determina se avviene un pareggio.
  */
 function gameOver(clients, spriteWinner, draw = false) 
 {
@@ -148,5 +192,55 @@ function gameOver(clients, spriteWinner, draw = false)
     {
         players[0].send(JSON.stringify({"gameover": "draw"}));
         players[1].send(JSON.stringify({"gameover": "draw"}));
+    }
+}
+
+
+/**
+ * Viene usata per controllare se **entrambi i giocatori** vogliono rigiocare la partita.
+ * @param {Object[]} info - Oggetto contenente le informazioni.
+ * @param {boolean} info.rematch - Se è **true** vuole il remacth, **false** no.
+ * @param {boolean} info.player - Sprite del giocatore che vuole o meno la rivincita.
+ * @param {Array.<WebSocket>} clients - Array di client WebSocket connessi.
+ */
+function rematch(info, clients) 
+{
+    let copyRematch = [...rematchArray];
+    let players = [...clients];
+
+    if (info.rematch && info.player == serverBoard.OBJ_SPRITE.O_S)
+    {
+        copyRematch[0] = true;
+
+        if (copyRematch.every(elements => elements == true))
+        {
+            serverBoard.restart();
+
+            players[0].send(JSON.stringify({"rematch": true}));
+            players[1].send(JSON.stringify({"rematch": true}));
+        }
+
+        else
+        {
+            rematchArray = [...copyRematch];
+        }
+    }
+
+    else if (info.rematch && info.player == serverBoard.OBJ_SPRITE.X_S)
+    {
+        copyRematch[1] = true;
+
+        if (copyRematch.every(elements => elements == true))
+        {
+            serverBoard.restart();
+
+            players[0].send(JSON.stringify({"rematch": true}));
+            players[1].send(JSON.stringify({"rematch": true}));
+        }
+
+        else
+        {
+            rematchArray = [...copyRematch];
+        }
     }
 }
