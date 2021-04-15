@@ -39,11 +39,6 @@ server.on('connection', socket => {
     socket.on('message', message => {
         let data = JSON.parse(message);
 
-        if (data.hasOwnProperty.call(data, "rematch"))
-        {
-            rematch(data, server.clients);
-        }
-
         if (data.hasOwnProperty.call(data, "chat"))
         {
             console.log(data);
@@ -55,6 +50,14 @@ server.on('connection', socket => {
                     client.send(JSON.stringify(data));
                 }
             });
+        }
+
+        else if (data.hasOwnProperty.call(data, "rematch")) // Supporto per il rematch della partita
+        {
+            if (data.rematch)
+            {
+                rematch(data, server.clients);
+            }
         }
 
         else
@@ -85,7 +88,7 @@ server.on('connection', socket => {
         }
     });
 
-    
+        
     /** 
     * Gestione evento 'close'. 
     * 
@@ -104,6 +107,12 @@ server.on('connection', socket => {
                     let lastOne = [...server.clients];
                     lastOne[0].send(JSON.stringify({"gameover": "enemy_quit"}));
                 }
+
+                else if (!reason.rematch)
+                {
+                    let lastOne = [...server.clients];
+                    lastOne[0].send(JSON.stringify({"no_rematch": true}));
+                }
             }
 
             else
@@ -116,6 +125,8 @@ server.on('connection', socket => {
         else
         {
             console.log("Partita senza giocatori :(");
+            serverBoard.restart();
+            rematchArray = [false, false];
         }
     });
 
@@ -216,13 +227,19 @@ function rematch(info, clients)
         {
             serverBoard.restart();
 
-            players[0].send(JSON.stringify({"rematch": true}));
-            players[1].send(JSON.stringify({"rematch": true}));
+            players[0].send(JSON.stringify({"server_rematch": true}));
+            players[1].send(JSON.stringify({"server_rematch": true}));
+        
+            rematchArray = [false, false];
+            
+            players[0].send(JSON.stringify({"spriteType": players[0].clientName, "round": "first"}));
+            players[1].send(JSON.stringify({"spriteType": players[1].clientName, "round": "second"}));
         }
 
         else
         {
             rematchArray = [...copyRematch];
+            players[1].send(JSON.stringify({"rematch_request": true}));
         }
     }
 
@@ -234,13 +251,19 @@ function rematch(info, clients)
         {
             serverBoard.restart();
 
-            players[0].send(JSON.stringify({"rematch": true}));
-            players[1].send(JSON.stringify({"rematch": true}));
+            players[0].send(JSON.stringify({"server_rematch": true}));
+            players[1].send(JSON.stringify({"server_rematch": true}));
+
+            rematchArray = [false, false];
+            
+            players[0].send(JSON.stringify({"spriteType": players[0].clientName, "round": "first"}));
+            players[1].send(JSON.stringify({"spriteType": players[1].clientName, "round": "second"}));
         }
 
         else
         {
             rematchArray = [...copyRematch];
+            players[0].send(JSON.stringify({"rematch_request": true}));
         }
     }
 }
