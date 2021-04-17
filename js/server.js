@@ -219,51 +219,54 @@ function rematch(info, clients)
     let copyRematch = [...rematchArray];
     let players = [...clients];
 
-    if (info.rematch && info.player == serverBoard.OBJ_SPRITE.X_S)
+    if (players.length === MAX_PLAYER)
     {
-        copyRematch[0] = true;
-
-        if (copyRematch.every(elements => elements == true))
+        if (info.rematch && info.player == serverBoard.OBJ_SPRITE.X_S)
         {
-            serverBoard.restart();
-
-            players[0].send(JSON.stringify({"server_rematch": true}));
-            players[1].send(JSON.stringify({"server_rematch": true}));
-        
-            rematchArray = [false, false];
+            copyRematch[0] = true;
+    
+            if (copyRematch.every(elements => elements == true))
+            {
+                serverBoard.restart();
+    
+                players[0].send(JSON.stringify({"server_rematch": true}));
+                players[1].send(JSON.stringify({"server_rematch": true}));
             
-            players[0].send(JSON.stringify({"spriteType": players[0].clientName, "round": "first"}));
-            players[1].send(JSON.stringify({"spriteType": players[1].clientName, "round": "second"}));
+                rematchArray = [false, false];
+                
+                players[0].send(JSON.stringify({"spriteType": players[0].clientName, "round": "first"}));
+                players[1].send(JSON.stringify({"spriteType": players[1].clientName, "round": "second"}));
+            }
+    
+            else
+            {
+                rematchArray = [...copyRematch];
+                players[1].send(JSON.stringify({"rematch_request": true}));
+            }
         }
-
-        else
+    
+        else if (info.rematch && info.player == serverBoard.OBJ_SPRITE.O_S)
         {
-            rematchArray = [...copyRematch];
-            players[1].send(JSON.stringify({"rematch_request": true}));
-        }
-    }
-
-    else if (info.rematch && info.player == serverBoard.OBJ_SPRITE.O_S)
-    {
-        copyRematch[1] = true;
-
-        if (copyRematch.every(elements => elements == true))
-        {
-            serverBoard.restart();
-
-            players[0].send(JSON.stringify({"server_rematch": true}));
-            players[1].send(JSON.stringify({"server_rematch": true}));
-
-            rematchArray = [false, false];
-            
-            players[0].send(JSON.stringify({"spriteType": players[0].clientName, "round": "first"}));
-            players[1].send(JSON.stringify({"spriteType": players[1].clientName, "round": "second"}));
-        }
-
-        else
-        {
-            rematchArray = [...copyRematch];
-            players[0].send(JSON.stringify({"rematch_request": true}));
+            copyRematch[1] = true;
+    
+            if (copyRematch.every(elements => elements == true))
+            {
+                serverBoard.restart();
+    
+                players[0].send(JSON.stringify({"server_rematch": true}));
+                players[1].send(JSON.stringify({"server_rematch": true}));
+    
+                rematchArray = [false, false];
+                
+                players[0].send(JSON.stringify({"spriteType": players[0].clientName, "round": "first"}));
+                players[1].send(JSON.stringify({"spriteType": players[1].clientName, "round": "second"}));
+            }
+    
+            else
+            {
+                rematchArray = [...copyRematch];
+                players[0].send(JSON.stringify({"rematch_request": true}));
+            }
         }
     }
 }
