@@ -160,8 +160,8 @@ function startGame(clients)
     var players = [...clients];
 
     // Aggiungo agli oggetti JSON la proprietà 'clientName' usata per identificare il turno del giocatore
-    players[0].clientName = "o_player";
-    players[1].clientName = "x_player";
+    players[0].clientName = "x_player";
+    players[1].clientName = "o_player";
 
     // Inzio dei dati ai giocatori
     players[0].send(JSON.stringify({"spriteType": players[0].clientName, "round": "first"}));
@@ -186,13 +186,13 @@ function gameOver(clients, spriteWinner, draw = false)
 
     if (!draw) // Non si è verificato il pareggio
     {
-        if (spriteWinner === serverBoard.OBJ_SPRITE.O_S) // Vince il giocatore 1
+        if (spriteWinner === serverBoard.OBJ_SPRITE.X_S) // Vince il giocatore 1
         {
             players[0].send(JSON.stringify({"gameover": "win"}));
             players[1].send(JSON.stringify({"gameover": "lose"}));
         }
     
-        else if (spriteWinner === serverBoard.OBJ_SPRITE.X_S) // Vince il giocatore 2
+        else if (spriteWinner === serverBoard.OBJ_SPRITE.O_S) // Vince il giocatore 2
         {
             players[0].send(JSON.stringify({"gameover": "lose"}));
             players[1].send(JSON.stringify({"gameover": "win"}));
@@ -219,7 +219,7 @@ function rematch(info, clients)
     let copyRematch = [...rematchArray];
     let players = [...clients];
 
-    if (info.rematch && info.player == serverBoard.OBJ_SPRITE.O_S)
+    if (info.rematch && info.player == serverBoard.OBJ_SPRITE.X_S)
     {
         copyRematch[0] = true;
 
@@ -243,7 +243,7 @@ function rematch(info, clients)
         }
     }
 
-    else if (info.rematch && info.player == serverBoard.OBJ_SPRITE.X_S)
+    else if (info.rematch && info.player == serverBoard.OBJ_SPRITE.O_S)
     {
         copyRematch[1] = true;
 

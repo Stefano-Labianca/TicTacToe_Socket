@@ -60,12 +60,12 @@ export class Board
     
         if (enemySprite === this.OBJ_SPRITE.O_S)
         {
-            this.gameBoard[vectorPosition.y][vectorPosition.x] = this.PLAYERS_VALUE.FIRST;
+            this.gameBoard[vectorPosition.y][vectorPosition.x] = this.PLAYERS_VALUE.SECOND;
         }   
     
         else if (enemySprite === this.OBJ_SPRITE.X_S)
         {
-            this.gameBoard[vectorPosition.y][vectorPosition.x] = this.PLAYERS_VALUE.SECOND;
+            this.gameBoard[vectorPosition.y][vectorPosition.x] = this.PLAYERS_VALUE.FIRST;
         }
     }
     
@@ -163,18 +163,18 @@ export class Board
     
         for (let y = 0; y < this.gameBoard.length; y++) 
         {
-            if (this.gameBoard[y][0] === this.PLAYERS_VALUE.FIRST)   
+            if (this.gameBoard[y][0] === this.PLAYERS_VALUE.SECOND)   
             {
-                if (this.gameBoard[y][1] === this.PLAYERS_VALUE.FIRST && this.gameBoard[y][2] === this.PLAYERS_VALUE.FIRST)
+                if (this.gameBoard[y][1] === this.PLAYERS_VALUE.SECOND && this.gameBoard[y][2] === this.PLAYERS_VALUE.SECOND)
                 {
                     winner = this.OBJ_SPRITE.O_S;
                     break;
                 }
             }
             
-            else if (this.gameBoard[y][0] === this.PLAYERS_VALUE.SECOND)
+            else if (this.gameBoard[y][0] === this.PLAYERS_VALUE.FIRST)
             {
-                if (this.gameBoard[y][1] === this.PLAYERS_VALUE.SECOND && this.gameBoard[y][2] === this.PLAYERS_VALUE.SECOND)
+                if (this.gameBoard[y][1] === this.PLAYERS_VALUE.FIRST && this.gameBoard[y][2] === this.PLAYERS_VALUE.FIRST)
                 {
                     winner = this.OBJ_SPRITE.X_S;
                     break;
@@ -198,18 +198,18 @@ export class Board
         
         for (let x = 0; x < this.gameBoard.length; x++) 
         {
-            if (this.gameBoard[0][x] === this.PLAYERS_VALUE.FIRST)
+            if (this.gameBoard[0][x] === this.PLAYERS_VALUE.SECOND)
             {
-                if (this.gameBoard[1][x] === this.PLAYERS_VALUE.FIRST && this.gameBoard[2][x] === this.PLAYERS_VALUE.FIRST)
+                if (this.gameBoard[1][x] === this.PLAYERS_VALUE.SECOND && this.gameBoard[2][x] === this.PLAYERS_VALUE.SECOND)
                 {
                     winner = this.OBJ_SPRITE.O_S;
                     break;
                 }
             }
         
-            else if (this.gameBoard[0][x] === this.PLAYERS_VALUE.SECOND)
+            else if (this.gameBoard[0][x] === this.PLAYERS_VALUE.FIRST)
             {
-                if (this.gameBoard[1][x] === this.PLAYERS_VALUE.SECOND && this.gameBoard[2][x] === this.PLAYERS_VALUE.SECOND)
+                if (this.gameBoard[1][x] === this.PLAYERS_VALUE.FIRST && this.gameBoard[2][x] === this.PLAYERS_VALUE.FIRST)
                 {
                     winner = this.OBJ_SPRITE.X_S;
                     break;
@@ -231,12 +231,12 @@ export class Board
     {
         var winner: string = "";
     
-        if (this.gameBoard[0][0] === this.PLAYERS_VALUE.FIRST && this.gameBoard[1][1] === this.PLAYERS_VALUE.FIRST && this.gameBoard[2][2] === this.PLAYERS_VALUE.FIRST)
+        if (this.gameBoard[0][0] === this.PLAYERS_VALUE.SECOND && this.gameBoard[1][1] === this.PLAYERS_VALUE.SECOND && this.gameBoard[2][2] === this.PLAYERS_VALUE.SECOND)
         {
             winner = this.OBJ_SPRITE.O_S;
         }
     
-        else if (this.gameBoard[0][0] === this.PLAYERS_VALUE.SECOND && this.gameBoard[1][1] === this.PLAYERS_VALUE.SECOND && this.gameBoard[2][2] === this.PLAYERS_VALUE.SECOND)
+        else if (this.gameBoard[0][0] === this.PLAYERS_VALUE.FIRST && this.gameBoard[1][1] === this.PLAYERS_VALUE.FIRST && this.gameBoard[2][2] === this.PLAYERS_VALUE.FIRST)
         {
             winner = this.OBJ_SPRITE.X_S;
         }
@@ -255,12 +255,12 @@ export class Board
     {
         var winner: string = "";
     
-        if (this.gameBoard[2][0] === this.PLAYERS_VALUE.FIRST && this.gameBoard[1][1] === this.PLAYERS_VALUE.FIRST && this.gameBoard[0][2] === this.PLAYERS_VALUE.FIRST)
+        if (this.gameBoard[2][0] === this.PLAYERS_VALUE.SECOND && this.gameBoard[1][1] === this.PLAYERS_VALUE.SECOND && this.gameBoard[0][2] === this.PLAYERS_VALUE.SECOND)
         {
             winner = this.OBJ_SPRITE.O_S;
         }
     
-        else if (this.gameBoard[2][0] === this.PLAYERS_VALUE.SECOND && this.gameBoard[1][1] === this.PLAYERS_VALUE.SECOND && this.gameBoard[0][2] === this.PLAYERS_VALUE.SECOND)
+        else if (this.gameBoard[2][0] === this.PLAYERS_VALUE.FIRST && this.gameBoard[1][1] === this.PLAYERS_VALUE.FIRST && this.gameBoard[0][2] === this.PLAYERS_VALUE.FIRST)
         {
             winner = this.OBJ_SPRITE.X_S;
         }
