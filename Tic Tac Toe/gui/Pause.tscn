@@ -1,0 +1,100 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://gui/Pause.gd" type="Script" id=1]
+[ext_resource path="res://assets/images/win_background.png" type="Texture" id=2]
+
+[sub_resource type="Theme" id=1]
+Button/colors/font_color = Color( 0.88, 0.88, 0.88, 1 )
+Button/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
+Button/colors/font_color_hover = Color( 0.431373, 0.741176, 0.917647, 1 )
+Button/colors/font_color_pressed = Color( 1, 1, 1, 1 )
+Button/constants/hseparation = 2
+Button/fonts/font = null
+Button/styles/disabled = null
+Button/styles/focus = null
+Button/styles/hover = null
+Button/styles/normal = null
+Button/styles/pressed = null
+
+[sub_resource type="DynamicFontData" id=2]
+font_path = "res://assets/fonts/Minecraft/Minecraft.ttf"
+
+[sub_resource type="DynamicFont" id=3]
+size = 120
+font_data = SubResource( 2 )
+
+[sub_resource type="Theme" id=4]
+Button/colors/font_color = Color( 0.88, 0.88, 0.88, 1 )
+Button/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
+Button/colors/font_color_hover = Color( 0.431373, 0.741176, 0.917647, 1 )
+Button/colors/font_color_pressed = Color( 0.0627451, 0.639216, 0.964706, 1 )
+Button/constants/hseparation = 2
+Button/fonts/font = null
+Button/styles/disabled = null
+Button/styles/focus = null
+Button/styles/hover = null
+Button/styles/normal = null
+Button/styles/pressed = null
+
+[sub_resource type="DynamicFontData" id=5]
+font_path = "res://assets/fonts/Minecraft/Minecraft.ttf"
+
+[sub_resource type="DynamicFont" id=6]
+size = 120
+font_data = SubResource( 5 )
+
+[node name="Pause" type="CanvasLayer"]
+pause_mode = 2
+script = ExtResource( 1 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color( 1, 1, 1, 0.486275 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 40.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 2 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Continue" type="Button" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -312.0
+margin_top = 320.0
+margin_right = 318.0
+margin_bottom = 446.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = SubResource( 1 )
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "RIPRENDI"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GiveUp" type="Button" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -352.0
+margin_top = 544.0
+margin_right = 353.0
+margin_bottom = 670.0
+mouse_default_cursor_shape = 2
+theme = SubResource( 4 )
+custom_fonts/font = SubResource( 6 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "ARRENDITI"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="Continue" to="." method="_on_Continue_pressed"]
+[connection signal="pressed" from="GiveUp" to="." method="_on_GiveUp_pressed"]

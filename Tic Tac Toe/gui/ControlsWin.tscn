@@ -1,0 +1,162 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://gui/ControlsWin.gd" type="Script" id=1]
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://assets/fonts/Minecraft/Minecraft.ttf"
+
+[sub_resource type="DynamicFont" id=2]
+size = 100
+font_data = SubResource( 1 )
+
+[sub_resource type="DynamicFontData" id=3]
+font_path = "res://assets/fonts/Minecraft/Minecraft.ttf"
+
+[sub_resource type="DynamicFont" id=4]
+size = 60
+font_data = SubResource( 3 )
+
+[sub_resource type="DynamicFontData" id=5]
+font_path = "res://assets/fonts/Minecraft/Minecraft.ttf"
+
+[sub_resource type="DynamicFont" id=6]
+size = 60
+font_data = SubResource( 5 )
+
+[sub_resource type="Theme" id=9]
+Button/colors/font_color = Color( 0.88, 0.88, 0.88, 1 )
+Button/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
+Button/colors/font_color_hover = Color( 0.431373, 0.741176, 0.917647, 1 )
+Button/colors/font_color_pressed = Color( 0.0627451, 0.639216, 0.964706, 1 )
+Button/constants/hseparation = 2
+Button/fonts/font = null
+Button/styles/disabled = null
+Button/styles/focus = null
+Button/styles/hover = null
+Button/styles/normal = null
+Button/styles/pressed = null
+
+[sub_resource type="DynamicFontData" id=7]
+font_path = "res://assets/fonts/Minecraft/Minecraft.ttf"
+
+[sub_resource type="DynamicFont" id=8]
+size = 36
+font_data = SubResource( 7 )
+
+[node name="ControlsWin" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 40.0
+margin_bottom = 40.0
+color = Color( 0.164706, 0.0784314, 0.239216, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -232.0
+margin_top = 64.0
+margin_right = 232.0
+margin_bottom = 164.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.929412, 0.952941, 0.196078, 1 )
+text = "COMANDI"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MouseSX" type="Control" parent="."]
+margin_left = 192.0
+margin_top = 460.0
+margin_right = 232.0
+margin_bottom = 500.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MSX" type="Label" parent="MouseSX"]
+margin_left = 128.0
+margin_top = -140.0
+margin_right = 527.0
+margin_bottom = -64.0
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color = Color( 0.929412, 0.952941, 0.196078, 1 )
+text = "Mouse sinistro"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Mousenfo" type="Label" parent="MouseSX"]
+margin_left = 1136.0
+margin_top = -140.0
+margin_right = 1408.0
+margin_bottom = -76.0
+custom_fonts/font = SubResource( 6 )
+text = "Seleziona"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ESCBtn" type="Control" parent="."]
+margin_left = 192.0
+margin_top = 460.0
+margin_right = 232.0
+margin_bottom = 500.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ESC" type="Label" parent="ESCBtn"]
+margin_left = 128.0
+margin_top = 44.0
+margin_right = 252.0
+margin_bottom = 120.0
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color = Color( 0.929412, 0.952941, 0.196078, 1 )
+text = "ESC"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ESCInfo" type="Label" parent="ESCBtn"]
+margin_left = 1192.0
+margin_top = 52.0
+margin_right = 1407.0
+margin_bottom = 112.0
+custom_fonts/font = SubResource( 6 )
+text = "Opzioni"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Back" type="Button" parent="."]
+margin_left = 64.0
+margin_top = 896.0
+margin_right = 256.0
+margin_bottom = 960.0
+mouse_default_cursor_shape = 2
+theme = SubResource( 9 )
+custom_fonts/font = SubResource( 8 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "< indietro"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="Back" to="." method="_on_Back_pressed"]

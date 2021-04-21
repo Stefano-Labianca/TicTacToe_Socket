@@ -1,0 +1,95 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://assets/images/win_background.png" type="Texture" id=1]
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://assets/fonts/Minecraft/Minecraft.ttf"
+
+[sub_resource type="DynamicFont" id=2]
+size = 200
+font_data = SubResource( 1 )
+
+[sub_resource type="DynamicFontData" id=3]
+font_path = "res://assets/fonts/Minecraft/Minecraft.ttf"
+
+[sub_resource type="DynamicFont" id=4]
+size = 40
+extra_spacing_bottom = 12
+font_data = SubResource( 3 )
+
+[sub_resource type="DynamicFontData" id=5]
+font_path = "res://assets/fonts/Minecraft/Minecraft.ttf"
+
+[sub_resource type="DynamicFont" id=6]
+size = 64
+font_data = SubResource( 5 )
+
+[node name="Winner" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="TextureRect" parent="."]
+modulate = Color( 1, 1, 1, 0.486275 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 40.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 1 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Message" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -528.0
+margin_top = 296.0
+margin_right = 525.0
+margin_bottom = 496.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.929412, 0.952941, 0.196078, 1 )
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RestartLabel" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -208.0
+margin_top = 316.0
+margin_right = 207.0
+margin_bottom = 399.0
+custom_fonts/font = SubResource( 4 )
+text = "Premi 'SPAZIO' 
+per ricominciare"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Reason" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -360.0
+margin_top = 60.0
+margin_right = 364.0
+margin_bottom = 191.0
+custom_fonts/font = SubResource( 6 )
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

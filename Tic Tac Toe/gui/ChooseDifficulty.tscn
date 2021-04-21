@@ -1,0 +1,159 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://gui/ChooseDifficulty.gd" type="Script" id=1]
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://assets/fonts/Minecraft/Minecraft.ttf"
+
+[sub_resource type="DynamicFont" id=2]
+size = 100
+font_data = SubResource( 1 )
+
+[sub_resource type="Theme" id=3]
+Button/colors/font_color = Color( 0.88, 0.88, 0.88, 1 )
+Button/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
+Button/colors/font_color_hover = Color( 0.431373, 0.741176, 0.917647, 1 )
+Button/colors/font_color_pressed = Color( 0.0627451, 0.639216, 0.964706, 1 )
+Button/constants/hseparation = 2
+Button/fonts/font = null
+Button/styles/disabled = null
+Button/styles/focus = null
+Button/styles/hover = null
+Button/styles/normal = null
+Button/styles/pressed = null
+
+[sub_resource type="DynamicFontData" id=4]
+font_path = "res://assets/fonts/Minecraft/Minecraft.ttf"
+
+[sub_resource type="DynamicFont" id=5]
+size = 72
+font_data = SubResource( 4 )
+
+[sub_resource type="Theme" id=6]
+Button/colors/font_color = Color( 0.88, 0.88, 0.88, 1 )
+Button/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
+Button/colors/font_color_hover = Color( 0.431373, 0.741176, 0.917647, 1 )
+Button/colors/font_color_pressed = Color( 0.0627451, 0.639216, 0.964706, 1 )
+Button/constants/hseparation = 2
+Button/fonts/font = null
+Button/styles/disabled = null
+Button/styles/focus = null
+Button/styles/hover = null
+Button/styles/normal = null
+Button/styles/pressed = null
+
+[sub_resource type="DynamicFontData" id=7]
+font_path = "res://assets/fonts/Minecraft/Minecraft.ttf"
+
+[sub_resource type="DynamicFont" id=8]
+size = 36
+font_data = SubResource( 7 )
+
+[node name="ChooseDifficulty" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -1264.0
+margin_bottom = -736.0
+rect_pivot_offset = Vector2( -374.842, -104.828 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -344.0
+margin_top = -32.0
+margin_right = 1624.0
+margin_bottom = 932.0
+mouse_default_cursor_shape = 2
+color = Color( 0.164706, 0.0784314, 0.239216, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 24.0
+margin_top = 72.0
+margin_right = 1248.0
+margin_bottom = 192.0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.929412, 0.952941, 0.196078, 1 )
+text = "SCEGLI LA DIFFICOLTA'"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Easy" type="Button" parent="."]
+margin_left = 784.0
+margin_top = 264.0
+margin_right = 1124.0
+margin_bottom = 342.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+theme = SubResource( 3 )
+custom_fonts/font = SubResource( 5 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Facile"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Medium" type="Button" parent="."]
+margin_left = 776.0
+margin_top = 464.0
+margin_right = 1128.0
+margin_bottom = 542.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+theme = SubResource( 3 )
+custom_fonts/font = SubResource( 5 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Media"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Hard" type="Button" parent="."]
+margin_left = 752.0
+margin_top = 664.0
+margin_right = 1152.0
+margin_bottom = 742.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+theme = SubResource( 3 )
+custom_fonts/font = SubResource( 5 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Difficile"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Back" type="Button" parent="."]
+margin_left = 64.0
+margin_top = 896.0
+margin_right = 256.0
+margin_bottom = 960.0
+mouse_default_cursor_shape = 2
+theme = SubResource( 6 )
+custom_fonts/font = SubResource( 8 )
+text = "< Indietro"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="Easy" to="." method="_on_Easy_pressed"]
+[connection signal="pressed" from="Medium" to="." method="_on_Medium_pressed"]
+[connection signal="pressed" from="Hard" to="." method="_on_Hard_pressed"]
+[connection signal="pressed" from="Back" to="." method="_on_Back_pressed"]

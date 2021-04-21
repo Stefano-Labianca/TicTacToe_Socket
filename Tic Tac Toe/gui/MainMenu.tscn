@@ -1,0 +1,227 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://gui/MainMenu.gd" type="Script" id=1]
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://assets/fonts/Minecraft/Minecraft.ttf"
+
+[sub_resource type="DynamicFont" id=2]
+size = 20
+extra_spacing_top = 6
+extra_spacing_bottom = 7
+font_data = SubResource( 1 )
+
+[sub_resource type="DynamicFontData" id=3]
+font_path = "res://assets/fonts/Minecraft/Minecraft.ttf"
+
+[sub_resource type="DynamicFont" id=4]
+size = 120
+font_data = SubResource( 3 )
+
+[sub_resource type="Theme" id=5]
+Button/colors/font_color = Color( 1, 1, 1, 1 )
+Button/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
+Button/colors/font_color_hover = Color( 0.431373, 0.741176, 0.917647, 1 )
+Button/colors/font_color_pressed = Color( 0.0627451, 0.639216, 0.964706, 1 )
+Button/constants/hseparation = 2
+Button/fonts/font = null
+Button/styles/disabled = null
+Button/styles/focus = null
+Button/styles/hover = null
+Button/styles/normal = null
+Button/styles/pressed = null
+
+[sub_resource type="DynamicFontData" id=6]
+font_path = "res://assets/fonts/Minecraft/Minecraft.ttf"
+
+[sub_resource type="DynamicFont" id=7]
+size = 64
+font_data = SubResource( 6 )
+
+[sub_resource type="Theme" id=8]
+Button/colors/font_color = Color( 0.88, 0.88, 0.88, 1 )
+Button/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
+Button/colors/font_color_hover = Color( 0.431373, 0.741176, 0.917647, 1 )
+Button/colors/font_color_pressed = Color( 0.0627451, 0.639216, 0.964706, 1 )
+Button/constants/hseparation = 2
+Button/fonts/font = null
+Button/styles/disabled = null
+Button/styles/focus = null
+Button/styles/hover = null
+Button/styles/normal = null
+Button/styles/pressed = null
+
+[sub_resource type="Theme" id=9]
+Button/colors/font_color = Color( 1, 1, 1, 1 )
+Button/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
+Button/colors/font_color_hover = Color( 0.431373, 0.741176, 0.917647, 1 )
+Button/colors/font_color_pressed = Color( 0.0627451, 0.639216, 0.964706, 1 )
+Button/constants/hseparation = 2
+Button/fonts/font = null
+Button/styles/disabled = null
+Button/styles/focus = null
+Button/styles/hover = null
+Button/styles/normal = null
+Button/styles/pressed = null
+
+[sub_resource type="DynamicFontData" id=10]
+font_path = "res://assets/fonts/Minecraft/Minecraft.ttf"
+
+[sub_resource type="DynamicFont" id=11]
+size = 64
+font_data = SubResource( 10 )
+
+[sub_resource type="DynamicFontData" id=12]
+font_path = "res://assets/fonts/Minecraft/Minecraft.ttf"
+
+[sub_resource type="DynamicFont" id=13]
+size = 24
+font_data = SubResource( 12 )
+
+[node name="MainMenu" type="Control"]
+anchor_left = -0.00146317
+anchor_right = 0.998537
+anchor_bottom = 1.0
+margin_left = -2.99658
+margin_right = -2.99658
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -978.194
+margin_top = -16.0
+margin_right = 973.806
+margin_bottom = 556.0
+color = Color( 0.164706, 0.0784314, 0.239216, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Madeby" type="Label" parent="."]
+margin_left = 69.8059
+margin_top = 968.0
+margin_right = 376.806
+margin_bottom = 1048.0
+custom_fonts/font = SubResource( 2 )
+text = "MADE BY LABIANCA STEFANO 
+AND PAPARUSSO MARIALUISA"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -402.194
+margin_top = 56.0
+margin_right = 403.806
+margin_bottom = 192.0
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color = Color( 0.929412, 0.952941, 0.196078, 1 )
+text = "TIC TAC TOE"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Singleplayer" type="Button" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -252.194
+margin_top = 328.0
+margin_right = 259.806
+margin_bottom = 398.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+theme = SubResource( 5 )
+custom_fonts/font = SubResource( 7 )
+text = "Singleplayer"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Multiplayer" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -188.194
+margin_top = -52.0
+margin_right = 195.806
+margin_bottom = 26.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+theme = SubResource( 8 )
+custom_fonts/font = SubResource( 7 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Multiplayer"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Controls" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -154.194
+margin_top = 108.0
+margin_right = 149.806
+margin_bottom = 178.0
+mouse_default_cursor_shape = 2
+theme = SubResource( 9 )
+custom_fonts/font = SubResource( 11 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Comandi"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quit" type="Button" parent="."]
+margin_left = 885.806
+margin_top = 800.0
+margin_right = 1037.81
+margin_bottom = 870.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+theme = SubResource( 8 )
+custom_fonts/font = SubResource( 7 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Esci"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GameMessagge" type="Label" parent="."]
+margin_left = 1269.81
+margin_top = 968.0
+margin_right = 1884.81
+margin_bottom = 1040.0
+custom_fonts/font = SubResource( 13 )
+custom_colors/font_color = Color( 0.929412, 0.952941, 0.196078, 1 )
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="GameMessagge"]
+wait_time = 7.5
+one_shot = true
+[connection signal="pressed" from="Singleplayer" to="." method="_on_Singleplayer_pressed"]
+[connection signal="pressed" from="Multiplayer" to="." method="_on_Multiplayer_pressed"]
+[connection signal="pressed" from="Controls" to="." method="_on_Controls_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_Quit_pressed"]
+[connection signal="timeout" from="GameMessagge/Timer" to="." method="_on_Timer_timeout"]
