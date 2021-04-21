@@ -1,9 +1,0 @@
-# Mettere su heroku dei cambiamenti
-
-$ git add .
-$ git commit -am "NOTE DEL CAMBIAMENTO"
-$ git push heroku master
-
-# Vedere dynos mancanti
-
-heroku ps -a tic-tac-toe-sockets
