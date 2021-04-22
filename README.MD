@@ -40,7 +40,7 @@ Su questo [link](http://stefanolab.altervista.org/TicTacToe/index.html) potete a
 
 Per visualizzare la documentazione dell'intero progetto, ci sono due file appositi. Uno di questi vi permettono di visualizzare le spiegazioni dei metodi e delle funzionalità del **motore grafico**, l'altro invece spiega metodi e funzionamento del **server**. All'interno della stessa cartella potete trovare anche il diagramma di flusso del funzionamento del programma.
 
-[Cartella](docs) della documentazione 
+[Cartella](docs) della documentazione.
 
 ### Esempio codice in GDScript
 
