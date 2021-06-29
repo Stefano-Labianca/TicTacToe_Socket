@@ -1,6 +1,6 @@
 extends Node
 
-export var SOCKET_URL = "wss://tic-tac-toe-sockets.herokuapp.com" # Server remoto
+export var SOCKET_URL = "" # Server remoto
 # export var SOCKET_URL = "ws://localhost:3000" # Server locale (Per usarlo bisogna avere NodeJS installato con i moduli Express, ws, TypeScript, nodemon)
 
 const MAX_PLAYER: int = 2
