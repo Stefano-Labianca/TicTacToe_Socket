@@ -105,7 +105,7 @@ La connessione al server avviene all'interno della funzione `start_multiplayer()
 ```Python
 extends Node
 
-export var SOCKET_URL = "wss://tic-tac-toe-sockets.herokuapp.com" # Server remoto
+export var SOCKET_URL = "wss://link-server-remoto" # Server remoto
 var _client = WebSocketClient.new()
 
 # Funzione usata per stabilire una connessione multiplayer
